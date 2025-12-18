@@ -1,0 +1,223 @@
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    background: #eaeaea;
+    font-family: 'Playfair Display', serif;
+}
+.logo{
+    align-items: center;
+    display: flex;
+    position: relative;
+    left: 250px;
+   top: -30px;
+}
+.certificate {
+    width: 210mm;
+    height: 297mm;
+background-color: #ca9324b7;
+
+    margin: auto;
+    padding: 25mm 20mm;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Everything else remains almost the same */
+
+.serial-number {
+    position: absolute;
+    top: 20mm;
+    right: 25mm;
+    font-size: 12pt;
+}
+
+.logo img {
+    width: 40mm;
+}
+
+.university-name {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: #1e5fa8;
+    font-size: 20pt;
+    margin-top: -20px;
+}
+
+.country {
+    text-align: center;
+    font-size: 20pt;
+}
+
+.intro-text {
+    text-align: center;
+    font-size: 26px;
+    margin: 15mm 0;
+    font-family: 'Great Vibes', cursive;
+    font-weight: bold;
+}
+
+.student-name {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 40px;
+    margin-top: -20px;
+}
+
+.body-text {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.6;
+    margin-top: 0;
+    font-family: 'Great Vibes', cursive;
+}
+.date-text{
+    margin-left: 99px;
+     font-family: 'Great Vibes', cursive;
+     font-size: 26px;
+     font-weight: bold;
+     margin-bottom: 0;
+     padding: 0;
+}
+.class-text {
+    text-align: center;
+    font-size: 26px;
+    font-family: 'Great Vibes', cursive;
+    font-weight: bold;
+    word-spacing: 12px;
+    margin-top: -10px;
+}
+
+.degree {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 26pt;
+}
+.degree-text {
+    /* text-align: center; */
+    font-size: 26px;
+    font-weight: bold;
+     font-family: 'Great Vibes', cursive;
+   margin-left: 90px;
+   word-spacing: 10px;
+}
+
+.footer {
+    position: absolute;
+    left: 20mm; 
+    right: 20mm;
+    display: flex; 
+     align-items: flex-start; 
+     gap: 10mm; 
+}
+
+/* RED SEAL */
+.seal {
+    width: 35mm;
+    height: 35mm;
+    background: crimson;
+    border-radius: 50%;
+}
+
+/* SIGNATURE AREA */
+/* .sign-area {
+    flex: 1;
+} */
+
+/* SIGNATURE BLOCK */
+.sign-block {
+    width: 80mm;
+    text-align: center;
+}
+
+ .sig-line {
+    border-bottom: 1px dotted #000;
+    position: relative;
+    top: 60px;
+    left: 188px;
+} 
+
+.sign-title {
+    font-size: 11pt;
+    margin-top: 2mm;
+    position: relative;
+    left: 140px;
+    top:54px;
+} 
+.sign-title-1{
+    font-size: 11pt;
+    margin-top: 2mm;
+    position: relative;
+    left: 305px;
+    top:22px;
+} 
+.sign-title-2{
+    font-size: 11pt;
+    margin-top: 2mm;
+    position: relative;
+    left: 305px;
+    top:22px;
+} 
+
+/* DATE */
+.sign-date-1 {
+    font-size: 22px;
+    position: relative;
+    top: -50px;
+    left: 385px;
+    margin-top: 20px;
+    font-family: 'Great Vibes', cursive;
+    font-weight: bold;
+}
+.sign-date-2 {
+    font-size: 22px;
+    position: relative;
+    top: -45px;
+    left: 385px;
+     font-family: 'Great Vibes', cursive;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.vc{
+    position: absolute;
+    top: 0px;
+    left:400px;
+margin-top: 30px;
+ font-family: 'Great Vibes', cursive;
+ font-size: 30px;
+ font-weight: bold;
+}
+
+.vc-1{
+    position: absolute;
+    top: 0px;
+    left:380px;
+margin-top: 170px;
+ font-family: 'Great Vibes', cursive;
+ font-size: 20px;
+ font-weight: bold;
+}
+
+
+
+/* DOTTED LINE STYLE */
+.dotted {
+    display: inline-block;
+    padding: 0 45mm 3mm;
+    border-bottom: 2px dotted #000;
+    min-width: 70mm;
+}
+
+.dotted-inline {
+    display: inline-block;
+    min-width: 80mm;
+    text-align: center;
+    padding-bottom: 2mm;
+    border-bottom: 2px dotted #000;
+}

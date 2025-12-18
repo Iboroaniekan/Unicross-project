@@ -1,0 +1,325 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootsrap Link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom style sheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>UNICROSS | VERIFY CERTIFICATE</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-light bg-gradient">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png'%}" width="210px"    alt=" unicross logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNav">
+      <ul class="navbar-nav  fs-6  ms-4 ">
+        <li class="nav-item">
+          <a class="nav-link text-black text-primary fw-semibold text-opacity-60 ms-3"   href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black fw-semibold text-opacity-60 ms-3 "  href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black fw-semibold text-opacity-60 ms-3 " href="#Verify" >Verify Certificate</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-black fw-semibold text-opacity-60 ms-3 " href="#">Contact</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-black fw-semibold text-opacity-60 ms-3 " href="#">Library</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-black fw-semibold text-opacity-60 ms-3 " href="#">Research</a>
+        </li>
+         </li>
+            <li class="nav-item " >
+            <a class="nav-link text-black fw-semibold text-opacity-60 ms-3 " href="#" id="form-open"> Staff Login</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+</nav>
+
+<!-- Hero background in carousel -->
+ <section class="home">
+    <div class="form-container">
+        <i class="fa-solid fa-xmark form-close"></i>
+<!-- login form -->
+ <div class="form login-form">
+    <form action="{% url 'accounts:admin_login' %}" method="post">
+        {% csrf_token %}
+        <h2>Login</h2>
+        {% if messages %}
+  {% for message in messages %}
+    <div class="login-error" style="color:red; margin-bottom:10px; text-align:center">
+        {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+{% if messages %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector('.home').classList.add('show');
+});
+</script>
+{% endif %}
+      <div class="input_box">
+        <input type="text" name="username" id="" placeholder="Enter your username" required  autocomplete="off">
+        <i class="fa-regular fa-user email"></i>
+      </div>
+      <div class="input_box">
+        <input type="password" name="password" id="" placeholder="Enter your Password " required autocomplete="off">
+        <i class="fa-solid fa-lock password"></i>
+        <i class="fa-regular fa-eye-slash pw-hide"></i>
+      </div>
+      <div class="option-field">
+        <span class="checkbox">
+            <input type="checkbox" name="" id="check">
+            <label for="check"> Remember me</label>
+        </span>
+        <a href="#" class="forgot_password">Forgot password?</a>
+      </div>
+       <button class="button">Login Now</button>
+      <div class="login_signup">
+        Don't have an account? <a href="#" id="signup">SignUp</a>
+      </div>
+    </form>
+ </div>
+
+
+    
+       <!-- Signup form -->
+ <div class="form signup-form">
+    <form action="{% url 'accounts:signup' %}" method="post">
+        {% csrf_token %}
+        <h2>SignUp</h2>
+        <div class="input_box">
+        <input type="text" name="username" id="" placeholder="Enter your username" required>
+        <i class="fa-regular fa-user email"></i>
+        </div>
+      <div class="input_box">
+        <input type="email" name="email" id="" placeholder="Enter your Email" required>
+        <i class="fa-regular fa-envelope email"></i>
+      </div>
+      <div class="input_box">
+        <input type="password" name="password1" id="" placeholder="Create Password " required>
+        <i class="fa-solid fa-lock password"></i>
+        <i class="fa-regular fa-eye-slash pw-hide"></i>
+      </div>
+      <div class="input_box">
+        <input type="password" name="password2" id="" placeholder="Confirm Password " required>
+        <i class="fa-solid fa-lock password"></i>
+        <i class="fa-regular fa-eye-slash pw-hide"></i>
+      </div>
+      <button class="button">SignUp Now</button>
+      <div class="login_signup">
+        Already have an account? <a href="#" id="login">Login</a>
+      </div>
+    </form>
+ </div>
+  </div>
+</section>
+<main>
+    <div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active c-item">
+      <img src="{% static 'images/unicross-background.jpg'%}" class="d-block w-100 c-img" alt="...">
+      <div class="carousel-caption top-0 mt-5 d-block ">
+        <h3 class="mt-5 fw-bold">WELCOME TO</h3>
+        <h1 class="mt-5 fw-bold">UNIVERSITY OF CROSS RIVER STATE</h1>
+        <p class="fs-5 mt-5 fw-bold">CERTIFICATE AUTHENTICATION AND VERIFICATION  SYSTEM.</p>
+        <button class="btn btn-primary px-3 py-2 mt-4">READ MORE</button>
+      </div>
+    </div>
+    <div class="carousel-item c-item-1">
+      <img src="{% static 'images/download.jpg '%}" class="d-block w-100  c-img-1" alt="...">
+      <div class="carousel-caption cl-2 d-block ">   
+     
+        <h1 class="fs-2 fw-bold mt-5  ">UNICROSS VC LEADS DELEGATION TO GOVERNMENT HOUSE,  PRESENTS AWARD-WINNING INNOVATIONS TO VISITOR</h1>
+        <p>The Vice Chancellor University of Cross River State (UNICROSS), Prof. Francisca Bassey, recently,....</p>
+         <button class="btn btn-primary px-3 py-2 mt-3">READ MORE</button>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</main>
+<!-- Verify Section -->
+  <section id="Verify" class="pt-5">
+     <h2 class="text-center my-3">Enter Certificate Code</h2>
+     <p class="text-center fw-semibold">Please enter unique code from certificate in the space provided below to verify its authenticity</p>
+     <div class="container">
+     <form class="row justify-content-center g-0 verify-form "id="verifyForm">
+            <div class="col-12 col-md-6">
+                <input type="text" class="form-control text-center"   id="certCode"  placeholder="Enter Certificate Code For Verification">
+            </div>
+            <div class="col-12 col-md-auto">
+                <button class="btn btn-primary w-100">VERIFY</button>
+            </div>
+            <p id="result" class="text-center mt-3"></p>
+        </form>
+        </div>
+  </section>
+   <!-- E-LIBRARY BANNER -->
+<section class="elib-banner py-4">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-md-8 d-flex align-items-center gap-3">
+<img src="{% static 'images/lo.png'%}" alt="logo" height="45">
+<div>
+<h5 class="mb-1 fw-bold">E-LIBRARY</h5>
+<p class="mb-0 small">Electronic library where you can have access to books, journals and articles</p>
+</div>
+</div>
+<div class="col-md-4 text-md-end mt-3 mt-md-0">
+<a href="#" class="btn rounded-pill px-4">Visit the E-Library</a>
+</div>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="footer pt-5">
+<div class="container">
+
+
+<div class="row gy-4">
+<!-- OUR CAMPUSES -->
+<div class="col-md-4">
+<h6>OUR CAMPUSES</h6>
+<div class="row">
+<div class="col-6">
+<ul class="list-unstyled small">
+<li><a href="#">CALABAR CAMPUS</a></li>
+<li><a href="#">OGOJA CAMPUS</a></li>
+</ul>
+</div>
+<div class="col-6">
+<ul class="list-unstyled small">
+<li><a href="#">OBUBRA CAMPUS</a></li>
+<li><a href="#">OKUKU CAMPUS</a></li>
+</ul>
+</div>
+</div>
+</div>
+   <!-- FACULTIES -->
+<div class="col-md-5">
+<h6>FACULTIES</h6>
+<div class="row small">
+<div class="col-6">
+<ul class="list-unstyled">
+<li><a href="#">Agriculture and Forestry</a></li>
+<li><a href="#">Basic Medical Sciences</a></li>
+<li><a href="#">Communication Technology</a></li>
+<li><a href="#">Engineering</a></li>
+<li><a href="#">Management Science</a></li>
+</ul>
+</div>
+<div class="col-6">
+<ul class="list-unstyled">
+<li><a href="#">Architecture</a></li>
+<li><a href="#">Biological Sciences</a></li>
+<li><a href="#">Education</a></li>
+<li><a href="#">Environmental Sciences</a></li>
+<li><a href="#">Physical Sciences</a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- HELP & SUPPORT -->
+<div class="col-md-3">
+<h6>HELP & SUPPORT</h6>
+<ul class="list-unstyled small">
+<li><a href="#">24x7 Live help</a></li>
+<li><a href="#">Feedback</a></li>
+<li><a href="#">Safety Tips</a></li>
+<li><a href="#">Contact us</a></li>
+<li><a href="#">FAQs</a></li>
+</ul>
+</div>
+</div>
+<hr class="my-4 border-secondary" />
+
+<!-- LOWER FOOTER -->
+<div class="row gy-4 align-items-center pb-4">
+<!-- GET IN TOUCH -->
+<div class="col-md-4 small">
+<h6>GET IN TOUCH</h6>
+<p class="mb-1"><i class="bi bi-geo-alt"></i> CRUTECH P.M.B 1123, Calabar, Cross River State, Nigeria.</p>
+<p class="mb-1"><i class="bi bi-telephone"></i> (+234) 805-212-9091</p>
+<p class="mb-0"><i class="bi bi-envelope"></i> info@unicross.edu.ng</p>
+</div>
+<!-- APPS -->
+<div class="col-md-4 text-center">
+<h6>DOWNLOAD OUR FREE MOBILE APPS</h6>
+<div class="d-flex justify-content-center gap-2 mt-2">
+<img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" height="40" alt="App Store">
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" height="40" alt="Google Play">
+</div>
+</div>
+<!-- SOCIAL MEDIA -->
+<div class="col-md-4 text-md-end text-center">
+<h6>SOCIAL MEDIA</h6>
+<div class="d-flex justify-content-md-end justify-content-center gap-3 mt-2">
+<a href="#"><i class="bi bi-facebook fs-5"></i></a>
+<a href="#"><i class="bi bi-twitter-x fs-5"></i></a>
+<a href="#"><i class="bi bi-google fs-5"></i></a>
+<a href="#"><i class="bi bi-youtube fs-5"></i></a>
+<a href="#"><i class="bi bi-whatsapp fs-5"></i></a>
+</div>
+</div>
+</div>
+</div>
+<!-- COPYRIGHT -->
+<div class="footer-bottom text-center py-3">
+Copyright © 2026 All Rights Reserved. Developed By Iboro Aniekan
+</div>
+</footer>
+   
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+     <script src="{% static 'js/script.js'%}"></script>
+<script>
+  document.getElementById("verifyForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // stop page refresh
+
+    const code = document.getElementById("certCode").value.trim();
+
+    if (code === "") {
+      document.getElementById("result").innerText = "Please enter a certificate code.";
+      return;
+    }
+
+    // Example check (fake)
+    if (code === "12345") {
+      document.getElementById("result").innerText = "✅ Certificate is VALID";
+    } else {
+      document.getElementById("result").innerText = "❌ Certificate NOT FOUND";
+    }
+  });
+</script>
+
+
+  </body>
+</html>
