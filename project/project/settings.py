@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# log out admin dashboard redirect to my homepage
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Application definition
 
@@ -38,8 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontend',
-    'accounts'
+    'accounts',
+    'certificate'
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587    
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "iboroaniekan10@gmail.com"
+EMAIL_HOST_PASSWORD = "ngpc creg kgad ztag"
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

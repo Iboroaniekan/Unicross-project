@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Degree Certificate</title>
+    <link rel="stylesheet" href="{% static 'css/certificate.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="certificate">
+    <div class="serial-number"></div>
+    
+
+    <div class="logo">
+        <img src="{% static 'images/crutech-logo.png' %}" alt="CRUTECH Logo" height="100px">  
+    </div>
+
+    <h1 class="university-name">Cross River University of Technology</h1>
+    <h2 class="country university-name">Nigeria</h2>
+
+    <p class="intro-text">Be it known that</p>
+
+    <h2 class="student-name dotted">{{ Certificate.student.full_name }}</h2>
+
+    <p class="body-text">
+        Having completed the approved course of study <br>
+        and fulfilled all the prescribed conditions
+    </p>
+
+    <p class="date-text">
+        has this day <span class="date dotted-inline">{{ Certificate.student.graduation_date|date:"F j, Y" }}</span>
+    </p>
+
+    <p class="degree-text">
+        been admitted by the Senate to the Degree of
+    </p>
+
+    <h2 class="degree dotted">{{ Certificate.certificate_type }} {{Certificate.course_name}}</h2>
+
+    <p class="class-text">
+        With <span class="dotted-inline">{{Certificate.classification}}</span>
+    </p>
+      
+     <div class="footer">
+     <!-- <div class="seal"></div> -->
+      <div class="seal star-seal">
+    <span class="ver">VERIFIED</span>
+</div>
+
+
+    <div class="sign-area">
+        <div class="sign-row">
+            <div class="sign-block">
+                <div class="sig-line"></div>
+                
+                <p class="sign-title">VICE CHANCELLOR</p>
+                <p class="vc">Bassey</p>
+                <p class="sign-title-1">DATE</p>
+            </div>
+            <p class="sign-date-1">{{Certificate.date_of_issue}}</p>
+        </div>
+
+        <div class="sign-row">
+            <div class="sign-block">
+                <div class="sig-line"></div>
+                
+                <p class="sign-title">REGISTRAR</p>
+                <p class="vc-1">ANDERSON</p>
+                <p class="sign-title-2">DATE</p>
+            </div>
+            <p class="sign-date-2">{{Certificate.date_of_issue}}</p>
+        </div> 
+        </div>
+         <div class="certificate-id">
+        Certificate Code: {{ Certificate.certificate_id }}
+    </div>
+
+    </div>
+</body>
+</html>
