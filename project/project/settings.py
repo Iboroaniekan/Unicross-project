@@ -30,10 +30,11 @@ ALLOWED_HOSTS = []
 # log out admin dashboard redirect to my homepage
 LOGOUT_REDIRECT_URL = '/'
 
-
+SITE_URL = "http://localhost:8000"
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,3 +137,51 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT =  os.path.join(BASE_DIR, 'assest')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+JAZZMIN_SETTINGS = {
+    "top_save_buttons": False, 
+    "site_title": "Unicross Admin",
+    "site_header": "Unicross Administration",
+    "welcome_sign": "Welcome to Unicross Admin",
+    "copyright": "Atech",
+     "topmenu_links":[
+         {"app":"certificate"},
+     ],
+    "show_ui_builder": True,
+    
+}
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-navy",
+    "navbar": "navbar-navy navbar-dark",
+    "no_navbar_border": True,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": True,
+    "sidebar_nav_flat_style": False,
+    "theme": "cerulean",
+    "dark_mode_theme": None,
+    # "button_classes": {
+    #     "primary": "btn-outline-primary",
+    #     "secondary": "btn-outline-secondary",
+    #     "info": "btn-info",
+    #     "warning": "btn-warning",
+    #     "danger": "btn-danger",
+    #     "success": "btn-success"
+    # },
+   
+}

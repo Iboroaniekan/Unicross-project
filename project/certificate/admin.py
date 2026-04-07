@@ -11,10 +11,18 @@ class StudentAdmin(admin.ModelAdmin):
 
 @admin.register(certificate)
 class CertificateAdmin(admin.ModelAdmin):
-    list_display = ('student', 'certificate_type', 'classification', 'certificate_id', 'created_at','view_certificate_link')
+    list_display = ('student', 'certificate_type', 'classification', 'certificate_id', 'created_at','qr_code_preview','view_certificate_link')
     search_fields = ('student__full_name', 'student__matric_number', 'certificate_id')
     list_filter = ('certificate_type', 'classification')
+    readonly_fields= ('certificate_id', 'verification_token', 'digital_signature', 'qr_code_preview')
     
+    # QR code preview
+    def qr_code_preview(self, obj):
+        if obj.qr_code:
+            return format_html('<img src="{}" width="30">', obj.qr_code.url)
+        return "-"
+    qr_code_preview.short_description = "QR Code"
+
      # Add a clickable link to view certificate
     def view_certificate_link(self, obj):
         return format_html(

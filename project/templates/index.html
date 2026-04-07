@@ -19,7 +19,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-light bg-gradient">
   <div class="container">
-    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" width="210px"    alt=" unicross logo"></a>
+    <a class="navbar-brand" href="#"><img src="{% static 'images/school.png' %}" width="210px"    alt=" unicross logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -148,15 +148,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 <button class="btn btn-primary w-100">VERIFY</button>
             </div>
         </form>
-        {% if result is not None %}
+        {% if Certificate %}
          <p id="result" class="text-center mt-3">
-          {% if result != False %}
+          {% if status == "valid" %}
                     <span class="text-success fw-bold">Certificate is VALID ✅</span><br>
-                    <a href="{% url 'view_certificate' result.certificate_id %}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Certificate</a>
-                    <a href="{% url 'download_certificate' result.certificate_id %}" target="_blank" class="btn btn-sm btn-outline-success mt-2">Download PDF</a>
+                    <a href="{% url 'view_certificate' Certificate.certificate_id %}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Certificate</a>
+                    
+                {% elif status == "tampered" %}
+                    <span class="text-warning fw-bold">⚠️ Certificate has been tampered!</span>
                 {% else %}
                     <span class="text-danger fw-bold">❌ Certificate NOT FOUND </span>
                 {% endif %}
+            </p>
+            {% elif status == "invalid" %}
+            <p id="result" class="text-center mt-3">
+                <span class="text-danger fw-bold">❌ Certificate NOT FOUND</span>
             </p>
         {% endif %}
 

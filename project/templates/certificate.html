@@ -12,7 +12,9 @@
 <div class="certificate">
     <div class="serial-number"></div>
     
-
+         <div class="certificate-id">
+         {{ Certificate.certificate_id }}
+    </div>
     <div class="logo">
         <img src="{% static 'images/crutech-logo.png' %}" alt="CRUTECH Logo" height="100px">  
     </div>
@@ -67,16 +69,19 @@
                 <div class="sig-line"></div>
                 
                 <p class="sign-title">REGISTRAR</p>
-                <p class="vc-1">ANDERSON</p>
+                <p class="vc-1">NDIFON</p>
                 <p class="sign-title-2">DATE</p>
             </div>
             <p class="sign-date-2">{{Certificate.date_of_issue}}</p>
         </div> 
         </div>
-         <div class="certificate-id">
-        Certificate Code: {{ Certificate.certificate_id }}
-    </div>
-
+        
+          <!-- QR Code -->
+        {% if Certificate.qr_code %}
+        <div class="qr-code" style="margin-top:15px;">
+            <img src="{{ Certificate.qr_code.url }}" alt="Certificate QR Code" width="100">
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>

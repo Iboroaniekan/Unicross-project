@@ -1,8 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+import hashlib
+import qrcode
+from io import BytesIO
+from django.conf import settings
+from django.core.files import File
 
 # Create your models here.
+def upload_path(instance, kind, filename):
+    ref = instance.certificate_id or ("TMP-" + uuid.uuid4().hex[:8].upper())
+    return f"certificates/{ref}/{kind}/{filename}"
+
+def qr_upload_path(instance, filename):
+    return upload_path(instance, "qr", filename)
 
 class Student(models.Model):
     full_name = models.CharField(max_length=200)
@@ -48,6 +59,10 @@ class certificate(models.Model):
     classification = models.CharField(max_length=50, choices=CLASSIFICATION_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     course_name = models.CharField(max_length=200)
+      # 🔐 SECURITY FIELDS
+    verification_token = models.CharField(max_length=64, blank=True, editable=False)
+    digital_signature = models.CharField(max_length=64, blank=True, editable=False)
+    qr_code = models.ImageField(upload_to=qr_upload_path, blank=True, null=True, editable=False)
     date_of_issue = models.DateField()
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -56,7 +71,43 @@ class certificate(models.Model):
     
     def __str__(self):
         return f"{self.student.full_name} - {self.certificate_type} - {self.classification}"
+    
+
+    # 🔐 DIGITAL SIGNATURE (tamper-proof)
+    def generate_signature(self):
+        data = f"{self.student.full_name}{self.student.matric_number}{self.course_name}{self.date_of_issue}{settings.SECRET_KEY}"
+        self.digital_signature = hashlib.sha256(data.encode("utf-8")).hexdigest()
+        return self.digital_signature
+    # 🔐 VERIFICATION TOKEN
+    def generate_verification_token(self):
+        if not self.verification_token:
+            raw_string = f"{self.certificate_id}{uuid.uuid4()}{settings.SECRET_KEY}"
+            self.verification_token = hashlib.sha256(raw_string.encode()).hexdigest()
+        return self.verification_token
+    
+     # 📱 QR CODE
+    def generate_qr_code(self):
+        if not self.certificate_id or not self.verification_token:
+            return
+
+        if self.qr_code:
+            return
+
+        verification_url = f"{settings.SITE_URL}/verify/{self.certificate_id}/?token={self.verification_token}"
+        qr = qrcode.QRCode(version=1, box_size=10, border=4)
+        qr.add_data(verification_url)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="transparent")
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        buffer.seek(0)
+        filename = f"QR-{self.certificate_id}.png"
+        self.qr_code.save(filename, File(buffer), save=False)
+
     def save(self, *args, **kwargs):
         if not self.certificate_id:
-            self.certificate_id = f"CERT-{uuid.uuid4().hex[:8].upper()}"
+            self.certificate_id = f"CERT-{uuid.uuid4().hex[:8].upper()}"  
+        self.generate_verification_token()
+        self.generate_signature()
+        self.generate_qr_code()
         super().save(*args, **kwargs)
