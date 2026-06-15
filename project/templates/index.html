@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <input type="checkbox" name="" id="check">
             <label for="check"> Remember me</label>
         </span>
-        <a href="{% url 'accounts:password_reset' %}" class="forgot_password">Forgot password?</a>
+        <a href="" class="forgot_password">Forgot password?</a>
       </div>
       <button class="button">Login Now</button>
       <!-- <div class="login_signup">
@@ -153,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
           {% if status == "valid" %}
                     <span class="text-success fw-bold">Certificate is VALID ✅</span><br>
                     <a href="{% url 'view_certificate' Certificate.certificate_id %}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">View Certificate</a>
+                    <a href="{% url 'download_certificate' Certificate.certificate_id %}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Download Certificate</a>
                     
                 {% elif status == "tampered" %}
                     <span class="text-warning fw-bold">⚠️ Certificate has been tampered!</span>

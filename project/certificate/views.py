@@ -1,29 +1,51 @@
 from django.shortcuts import render,get_object_or_404
+from django.template.loader import render_to_string
 from .models import certificate
 from django.http import HttpResponse
 from weasyprint import HTML   #type :ignore
 from django.conf import settings
 import hashlib
+import os
 # Create your views here.
-
+#Function to View Certificate
 def view_certificate(request, cert_id):
     Certificate = get_object_or_404(certificate, certificate_id=cert_id)
     return render(request, 'certificate.html', {'Certificate': Certificate})
 
+#Function to download certificate
+def download_certificate(request, cert_id):
+    Certificate = get_object_or_404( certificate,certificate_id=cert_id )
+    #Fonts path
+    great_vibes_font = os.path.join(settings.BASE_DIR,"static", "fonts", "GreatVibes-Regular.ttf" ).replace("\\", "/")
+    cinzel_font = os.path.join(settings.BASE_DIR,"static", "fonts","Cinzel-Bold.ttf" ).replace("\\", "/")
+    playfair_font = os.path.join(settings.BASE_DIR,"static", "fonts", "PlayfairDisplay-Bold.ttf").replace("\\", "/")
+    playfair_italic_font = os.path.join(settings.BASE_DIR,"static", "fonts","PlayfairDisplay-BoldItalic.ttf").replace("\\", "/")
+            #Logo path
+    logo_path= os.path.join(settings.BASE_DIR,"static","images","crutech-logo.png").replace("\\", "/")
+            # QR code path
+    qr_path = None
+    if Certificate.qr_code:
+        qr_path = Certificate.qr_code.path.replace("\\", "/")
 
-# def download_certificate(request, cert_id):
-#     Certificate = get_object_or_404(certificate, certificate_id=cert_id)
-    
-#     # Render HTML template
-#     html_string = render(request, 'certificate.html', {'Certificate': Certificate}).content.decode('utf-8')
-#     # Generate PDF using WeasyPrint
-#     pdf_file = HTML(string=html_string, base_url=request.build_absolute_uri('/')).write_pdf()
-#     # Return as PDF response
-#            # Send PDF as download
-#     response = HttpResponse(pdf_file, content_type='application/pdf')
-#     response['Content-Disposition'] = f'attachment; filename="{Certificate.student.full_name}_certificate.pdf"'
-#     return response
+    html = render_to_string("certificate_pdf.html",
+    {"Certificate": Certificate,
+    "logo_path":logo_path,
+    "qr_path":qr_path,
+    "great_vibes_font": great_vibes_font,
+    "cinzel_font": cinzel_font,
+    "playfair_font": playfair_font,
+    "playfair_italic_font": playfair_italic_font,
+    } )
 
+    pdf = HTML(string=html,base_url=settings.BASE_DIR).write_pdf()
+
+    response = HttpResponse( pdf,content_type="application/pdf")
+
+    response["Content-Disposition"] = (f'attachment; filename="{Certificate.student.full_name}.pdf"')
+        
+    return response
+
+#Function to Verify certificate
 def verify_certificate(request):
     Certificate = None  # Will store verification outcome
     status = None
@@ -56,6 +78,8 @@ def verify_certificate(request):
         'status': status
     })
 
+
+#Function to Verify QR_CODE
 def verify_qr(request, cert_id):
     """
     QR code verification: validate certificate using certificate_id and token from URL

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 LOGOUT_REDIRECT_URL = '/'
 
 SITE_URL = "http://localhost:8000"
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,14 +48,7 @@ INSTALLED_APPS = [
     'certificate'
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587    
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "iboroaniekan10@gmail.com"
-EMAIL_HOST_PASSWORD = "ngpc creg kgad ztag"
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -151,7 +146,6 @@ JAZZMIN_SETTINGS = {
          {"app":"certificate"},
      ],
     "show_ui_builder": True,
-    
 }
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,

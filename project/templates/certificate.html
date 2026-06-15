@@ -45,43 +45,44 @@
         With <span class="dotted-inline">{{Certificate.classification}}</span>
     </p>
       
-     <div class="footer">
-     <!-- <div class="seal"></div> -->
-      <div class="seal star-seal">
-    <span class="ver">VERIFIED</span>
+        <div class="footer">
+            <div class="seal star-seal">
+                <span class="ver">VERIFIED</span>
+          </div>
+
+
+            <div class="sign-area">
+                <div class="sign-row">
+                    <div class="sign-block">
+                        <div class="sig-line"></div>
+                        
+                        <p class="sign-title">VICE CHANCELLOR</p>
+                        <p class="vc">Bassey</p>
+                        <p class="sign-title-1">DATE</p>
+                    </div>
+                    <p class="sign-date-1">{{Certificate.date_of_issue}}</p>
+                </div>
+
+                <div class="sign-row">
+                    <div class="sign-block">
+                        <div class="sig-line"></div>
+                        
+                        <p class="sign-title">REGISTRAR</p>
+                        <p class="vc-1">NDIFON</p>
+                        <p class="sign-title-2">DATE</p>
+                    </div>
+                    <p class="sign-date-2">{{Certificate.date_of_issue}}</p>
+                </div> 
+                </div>
+                
+                <!-- QR Code -->
+                {% if Certificate.qr_code %}
+                <div class="qr-code" style="margin-top:15px;">
+                    <img src="{{ Certificate.qr_code.url }}" alt="Certificate QR Code" width="100">
+                </div>
+                {% endif %}
+            </div>
+      </div>
 </div>
-
-
-    <div class="sign-area">
-        <div class="sign-row">
-            <div class="sign-block">
-                <div class="sig-line"></div>
-                
-                <p class="sign-title">VICE CHANCELLOR</p>
-                <p class="vc">Bassey</p>
-                <p class="sign-title-1">DATE</p>
-            </div>
-            <p class="sign-date-1">{{Certificate.date_of_issue}}</p>
-        </div>
-
-        <div class="sign-row">
-            <div class="sign-block">
-                <div class="sig-line"></div>
-                
-                <p class="sign-title">REGISTRAR</p>
-                <p class="vc-1">NDIFON</p>
-                <p class="sign-title-2">DATE</p>
-            </div>
-            <p class="sign-date-2">{{Certificate.date_of_issue}}</p>
-        </div> 
-        </div>
-        
-          <!-- QR Code -->
-        {% if Certificate.qr_code %}
-        <div class="qr-code" style="margin-top:15px;">
-            <img src="{{ Certificate.qr_code.url }}" alt="Certificate QR Code" width="100">
-        </div>
-        {% endif %}
-    </div>
 </body>
 </html>

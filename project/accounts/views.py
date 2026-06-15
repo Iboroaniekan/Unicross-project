@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 
 # Create your views here.
 User = get_user_model()
-
+#Function to Login to admin dashboard
 def admin_login(request):
     if request.method == "POST":
         email = request.POST.get("email")
