@@ -134,11 +134,9 @@ class certificate(models.Model):
         playfair_italic_font = os.path.join(settings.BASE_DIR,"static", "fonts","PlayfairDisplay-BoldItalic.ttf").replace("\\", "/")
           #Logo path
         logo_path= os.path.join(settings.BASE_DIR,"static","images","crutech-logo.png").replace("\\", "/")
-          # QR code path
-        qr_path = None
-        
-        if self.qr_code:
-            qr_path = self.qr_code.path.replace("\\", "/")
+          
+       # QR code URL (works for both local storage and Cloudinary)
+        qr_path = self.qr_code.url if self.qr_code else None
 
         html = render_to_string(
             "certificate_pdf.html",
@@ -191,7 +189,9 @@ class certificate(models.Model):
         self.generate_verification_token()
         self.generate_signature()
         self.generate_qr_code()
-        self.generate_certificate_pdf()
         super().save(*args, **kwargs)
+        self.generate_certificate_pdf()
+        super().save(update_fields=["certificate_file"])
+        
            
        

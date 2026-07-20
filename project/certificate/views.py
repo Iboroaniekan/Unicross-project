@@ -23,9 +23,7 @@ def download_certificate(request, cert_id):
             #Logo path
     logo_path= os.path.join(settings.BASE_DIR,"static","images","crutech-logo.png").replace("\\", "/")
             # QR code path
-    qr_path = None
-    if Certificate.qr_code:
-        qr_path = Certificate.qr_code.path.replace("\\", "/")
+    qr_path = Certificate.qr_code.url if Certificate.qr_code else None
 
     html = render_to_string("certificate_pdf.html",
     {"Certificate": Certificate,
