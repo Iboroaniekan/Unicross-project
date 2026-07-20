@@ -136,6 +136,7 @@ class certificate(models.Model):
         logo_path= os.path.join(settings.BASE_DIR,"static","images","crutech-logo.png").replace("\\", "/")
           # QR code path
         qr_path = None
+        
         if self.qr_code:
             qr_path = self.qr_code.path.replace("\\", "/")
 
