@@ -34,40 +34,6 @@ def admin_login(request):
 
 
 
-# User = get_user_model()
-
-# def signup(request):
-    
-#     if request.method == "POST":
-#         username = request.POST.get("username")
-#         email = request.POST.get("email")
-#         password1 = request.POST.get("password1")
-#         password2 = request.POST.get("password2")
-
-#         if password1 != password2:
-#             messages.error(request, "Passwords do not match.")
-#             return redirect('/')  # show signup form popup
-
-#         if User.objects.filter(email=email).exists():
-#             messages.error(request, "Email already registered.")
-#             return redirect('/')  # Popup will show error
-
-#         user = User.objects.create_user(
-#             username=username,
-#             email=email,
-#             password=password1,
-#             is_staff=False,   # regular user by default
-#             is_superuser=False
-#         )
-
-#         messages.success(request, "Account created. Please log in.")
-#         return redirect('/')  # Show login form popup
-
-#     return redirect('/')
-
-
-
-
 
 
 

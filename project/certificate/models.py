@@ -28,11 +28,11 @@ def certificate_file_upload_path(instance, filename):
 
 
 def validate_matric(value):
-    pattern = r'^\d{2}/[A-Z]{2,10}/\d+$'
+    pattern = r'^\d{2}/([A-Z]{1,10}/)?[A-Z]{2,10}/\d+$'
 
     if not re.match(pattern, value.upper()):
         raise ValidationError(
-            "Matric number must be like 21/CSC/1234"
+            "Matric number must be like 21/CSC/123 or 21/D/CSC/123"
         )
 
 # Details of the student that are stored in the database

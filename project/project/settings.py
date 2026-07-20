@@ -169,13 +169,6 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_flat_style": False,
     "theme": "cerulean",
     "dark_mode_theme": None,
-    # "button_classes": {
-    #     "primary": "btn-outline-primary",
-    #     "secondary": "btn-outline-secondary",
-    #     "info": "btn-info",
-    #     "warning": "btn-warning",
-    #     "danger": "btn-danger",
-    #     "success": "btn-success"
-    # },
+
    
 }

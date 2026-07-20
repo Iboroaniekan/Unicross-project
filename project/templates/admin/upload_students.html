@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<div style="max-width:700px">
+
+    <h1>Upload Students Data</h1>
+
+    <p>
+        Upload an Excel (.xlsx) or CSV file containing student records.
+    </p>
+
+    <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input
+            type="submit"
+            value="Upload"
+            class="btn btn-success"
+        >
+
+    </form>
+
+</div>
+
+{% endblock %}
